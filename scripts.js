@@ -1,67 +1,27 @@
-const add = function (a, b) {
-  return a + b;
-};
+let display = document.querySelector(".display");
 
-const subtract = function (a, b) {
-  return a - b;
-};
+let buttons = Array.from(document.getElementsByClassName("button"));
 
-const multiply = function (a, b) {
-  return a * b;
-};
-
-const divide = function (a, b) {
-  return a / b;
-};
-
-const power = function (a, b) {
-  return Math.pow(a, b);
-};
-
-const factorial = function (a) {
-  if (a === 0) {
-    return 1;
-  } else {
-    return a * factorial(a - 1);
-  }
-};
-
-const operate = function (a, b, operator) {
-  switch (operator) {
-    case "+":
-      return add(a, b);
-    case "-":
-      return subtract(a, b);
-    case "*":
-      return multiply(a, b);
-    case "/":
-      return divide(a, b);
-  }
-};
-
-var displayNumber;
-function setNumber(a) {
-  displayNumber = a;
-  document.getElementById("screen").innerHTML += displayNumber;
-}
-
-var displayOperator;
-function userOperator(a) {
-  displayOperator = a;
-  document.getElementById("screen").innerHTML += displayOperator;
-}
-
-function clearDisplay() {
-  document.getElementById("screen").innerHTML = "";
-}
-
-function equal() {
-  var x = eval(
-    document.getElementById("screen").innerHTML.replace(/[^-()\d/*+.]/g, "")
-  );
-  document.getElementById("screen").innerHTML = x;
-}
-
-function removeLast() {
-  return document.getElementById("screen").innerHTML.slice(0, -1);
-}
+buttons.map((button) => {
+  button.addEventListener("click", (e) => {
+    switch (e.target.innerText) {
+      case "C":
+        display.innerText = "";
+        break;
+      case "=":
+        try {
+          display.innerText = eval(display.innerText);
+        } catch {
+          display.innerText = "Error";
+        }
+        break;
+      case "←":
+        if (display.innerText) {
+          display.innerText = display.innerText.slice(0, -1);
+        }
+        break;
+      default:
+        display.innerText += e.target.innerText;
+    }
+  });
+});
