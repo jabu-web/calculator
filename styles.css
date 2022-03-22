@@ -51,3 +51,9 @@
   color: white;
   transition: 0.5s ease-in-out;
 }
+
+.del:hover {
+  background-color: #c92023;
+  color: white;
+  transition: 0.5s ease-in-out;
+}
